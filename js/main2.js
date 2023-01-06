@@ -1,49 +1,30 @@
-async function getApi() {
+async function categorie() {
   const DataApi = await fetch(
     "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
   );
   const DataResolte = await DataApi.json();
-  console.log(DataResolte);
-
+  // console.log(DataResolte);
   for (let i = 0; i < DataResolte.meals.length; i++) {
-    document.getElementById(
-      "cantry"
-    ).innerHTML += `<option>${DataResolte.meals[i].strCategory}</option>`;
+    document.getElementById("select1").innerHTML +=
+    `<option>${DataResolte.meals[i].strCategory}</option>`;
   }
 }
-getApi();
-
-fetch("https://www.breakingbadapi.com")
-.then(function(ell){
-    return ell.json()
-}).then(function(data){
-    console.log(data)
-})
+categorie();
 
 
 
-// async function getApi3() {
-//     const DataApi3 = await fetch("https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast")
-//     const DataResolte3 = await DataApi3.json()
-//     console.log(DataResolte3)
 
-//     for(let i=0 ;i<=DataResolte3.meals.length ;i++){
-//         document.getElementById("select3").innerHTML +=
-//         `<option>${DataResolte3.meals[i].strArea}</option>`
-//     }
+async function reqion() {
+    const DataApi2 = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list")
+    const DataResolte2 = await DataApi2.json()
+    // console.log(DataResolte2)
 
-// }
-// getApi3()
+    for (let i = 0; i < DataResolte2.meals.length; i++) {
+      document.getElementById("select2").innerHTML +=
+      `<option>${DataResolte2.meals[i].strArea}</option>`;
+    }
 
-// document.getElementById("cantry").innerHTML+=
-// async function getApi() {
-//     const DataApi = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
-//     const DataResolte = await DataApi.json()
-//     console.log(DataResolte)
+}
+reqion()
 
-//         // for(let i=0 ;i<=DataResolte.meals.length ;i++){
-//         //     document.getElementById("cantry").innerHTML +=
-//         //     `<option>${DataResolte.meals[i].strCategory}</option>`
-//         // }
 
-// }
