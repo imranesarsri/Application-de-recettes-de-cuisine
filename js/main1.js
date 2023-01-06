@@ -7,127 +7,138 @@ let api6 = "https://www.themealdb.com/api/json/v1/1/categories.php";
 let api7 = "https://www.themealdb.com/api/json/v1/1/list.php?c=list";
 let api8 = "https://www.themealdb.com/api/json/v1/1/list.php?a=list";
 let api9 = "https://www.themealdb.com/api/json/v1/1/list.php?i=list";
-let api10 = "https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast";
+let api10 =
+  "https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast";
 let api11 = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
 let api12 = "https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian";
 let api13 = "https:///images/media/meals/llcbn01574260722.jpg/preview";
 let api14 = "https://www.themealdb.com/images/ingredients/Lime.png";
 let api15 = "https:/www.themealdb.com/images/ingredients/Lime-Small.png";
 
-
-// chong pag 1 and pag 2
-// function pag2() {
-// document.getElementById("main").innerHTML = ` <div class="row ">
-
-//     <select id="cantry" class="col-4 mt-5 ms-5" aria-label="Default select example">
-//         <option selected>Open this select menu</option></select>
-
-//     <button class="col-2 mt-5 ms-5 btn btn-primary">serche</button>
-
-//     <select class="col-4 mt-5 ms-5" aria-label="Default select example">
-//         <option selected>Open this select menu</option>
-//         <option value="1">One</option>
-//         <option value="2">Two</option>
-//         <option value="3">Three</option>
-//     </select>   
-
-// </div>`;
-// }
-
-// function pag1() {
-//   document.getElementById("main").innerHTML = `<main id="main">
-    
-//     <div class="search">
-//         <div class="btn-inp">
-//             <button class="button">hhdf</button>
-//             <input type="text">
-//         </div>
-//     </div>`;
-// }
-
-
-
+// stard random carte
+let arrDataCart = [];
 for (let i = 0; i < 6; i++) {
-    async function getApi2() {
+  async function getApi2() {
     const DataApi2 = await fetch(api_random);
     const DataResolte2 = await DataApi2.json();
-    console.log(DataResolte2);
-        
-    document.getElementById("contener").innerHTML += `
+    arrDataCart.push(
+      (person = {
+        nam: DataResolte2.meals[0].strMeal,
+        vidio: DataResolte2.meals[0].strYoutube,
+        image: DataResolte2.meals[0].strMealThumb,
+        paragraph: DataResolte2.meals[0].strInstructions,
+      })
+    );
+
+    document.getElementById("container").innerHTML += `
             <div class="card" style="width: 18rem;">
-            <img id="image1" src="${DataResolte2.meals[0].strMealThumb}" class="card-img-top" alt="...">
+            <img id="image1" src="${DataResolte2.meals[0].strMealThumb}" class="card-img-top" alt="image_${i}">
             <div class="card-body">
                 <h5 class="card-title text-center ">${DataResolte2.meals[0].strMeal}</h5>
-                <a  onclick="popupModal()" class="btn btn-primary w-100 " id="btn_${i}">Apprendre encore plus ${i}</a>
+                <a value="val${i}"  onclick="popupModal(${i})" class="btn btn-primary w-100 " id="btn_${i}">Apprendre encore plus ${i}</a>
             </div>
         </div>
         `;
+  }
 
-
-}
-function popupModal(){
-
-    console.log("idMeal")
-    // document.querySelectorAll(".btn").forEach(btn => {
-    //     btn.addEventListener("click",(e)=>{
-    //         e.preventDefault();
-    //         let dataName = e.target.previousElementSibling;
-    //         console.log(dataName);
-    //     })
-    // });
-    submit()
+  getApi2();
 }
 
-getApi2();
+console.log(arrDataCart);
+
+function popupModal(i) {
+    document.getElementById("pop_up").style.display="grid"
+    document.getElementById("pop_up").innerHTML = `
+
+    <div class="box h4">
+        <h4>${arrDataCart[i].nam}</h4>
+    </div>
+    <div class="box image">
+        <img src="${arrDataCart[i].image}" height="400" width="300" alt="image_${i}">
+    </div>
+    <div class="box vidio">
+        <iframe width="640" height="390" src="${arrDataCart[i].vidio.replace("https://www.youtube.com/watch?v=" , "https://www.youtube.com/embed/" )}"
+        title="Fetching API data and displaying API data inside table." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+        gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+    </div>
+    <div class="box paragraph">
+        <p>${arrDataCart[i].paragraph}</p>
+    </div>
+
+    `;
+
 }
 
-// fin random carte
+
+
+
+async function search() {
+
+    let inp =document.getElementById("search")
     
+    document.getElementById("container").innerHTML +=""
+    const searchApi = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=a`)
+    const searchData = await searchApi.json()
 
-async function submit() {
-    const DataApi2 = await fetch(api_random);
-    const DataResolte2 = await DataApi2.json();
-    console.log(DataResolte2);
-    document.getElementById("pop-up").innerHTML =
-    `
-    <div>
-        <img id="pup_img" src="${DataResolte2.meals[0].strMealThumb}" width="400" alt="">
-        <iframe width="320" height="200" class="mt-2" src="${DataResolte2.meals[0].strYoutube.replace(
-            "https://www.youtube.com/watch?v=",
-            "https://www.youtube.com/embed/" )}
-        "title="Tips For Using Async/Await in JavaScript" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    </div>
-    <div>
-        <p id="pup_p">${DataResolte2.meals[0].strInstructions}</p>
-    </div>
-`
+ for(let k=0 ; k< searchData.meals.length ; k++){
+
+    console.log(searchData.meals[k].strMeal)
+
 }
-
-// strInstructions
-
-for(let j=0 ; j< 6 ;j++){
-async function popupModal() {
-
-    const DataApi2 = await fetch(api_random);
-    const DataResolte2 = await DataApi2.json();
-    console.log(DataResolte2);
-    document.getElementById("pop-up").innerHTML =
-    `
-    <div>
-        <img id="pup_img" src="${DataResolte2.meals[0].strMealThumb}" width="400" alt="">
-        <iframe width="320" height="200" class="mt-2" src="${DataResolte2.meals[0].strYoutube.replace(
-            "https://www.youtube.com/watch?v=",
-            "https://www.youtube.com/embed/" )}
-        "title="Tips For Using Async/Await in JavaScript" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    </div>
-    <div>
-        <p id="pup_p">${DataResolte2.meals[0].strInstructions}</p>
-    </div>
-`
-}
+//     console.log(searchData)
 
 
+//     document.getElementById("container").innerHTML += `
+//     <div class="card" style="width: 18rem;">
+//     <img id="image1" src="${searchData.meals[k].strMealThumb}" class="card-img-top" alt="image_${k}">
+//     <div class="card-body">
+//         <h5 class="card-title text-center ">${searchData.meals[k].strMeal}</h5>
+//         <a value="val${k}"  onclick="popupModal(${k})" class="btn btn-primary w-100 " id="btn_${k}">Apprendre encore plus ${k}</a>
+//     </div>
+// </div>
+// `;
 }
 
 
 
+
+
+
+search()
+
+
+
+async function ccc() {
+    let inp = document.getElementById("search")
+    let searchValue = inp.value    
+
+    const searchApi = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`)
+    const searchData = await searchApi.json()
+    
+    // document.getElementById("tjriba").innerHTML=""
+    document.getElementById("container").innerHTML =""
+    if(inp.onblur === true){
+        for (let index = 0; index < 6; index++) {
+            console.log(searchData.meals[index])
+        
+            document.getElementById("container").innerHTML +=
+            `
+                <div class="card" style="width: 18rem;">
+                    <img id="image1" src="${searchData.meals[index].strMealThumb}" class="card-img-top" alt="image_${index}">
+                <div class="card-body">
+                    <h5 class="card-title text-center ">${searchData.meals[index].strMeal}</h5>
+                    <a value="val${index}"  onclick="popupModal(${index})" class="btn btn-primary w-100 " id="btn_${index}">Apprendre encore plus ${index}</a>
+                </div>
+                </div>
+        `;
+        
+        
+        }
+    }
+}
+
+
+ccc()
 
 
