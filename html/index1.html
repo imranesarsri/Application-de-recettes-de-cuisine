@@ -11,24 +11,26 @@
 <body>
 
     <ul class="nav bg-dark ps-5 p-2 d-flex " style="box-shadow:0 5px 15px black;">
+
         <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" href="#">Active</a>
+            <a class="nav-link text-light" onclick="pag1()" href="index1.html">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-light" onclick="pag1()" href="index1.html">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" onclick="pag2()" href="index2.html">Lmink</a>
+            <a class="nav-link text-light" onclick="pag2()" href="index2.html">Page 1</a>
         </li>
     </ul>
+
+
+    <div id="tjriba"></div>
 
     <!-- main -->
 <main id="main">
     
     <div class="search">
         <div class="btn-inp">
-            <button class="button">hhdf</button>
-            <input type="text">
+            <button onclick="search()" class="button">search</button>
+            <input type="text" oninput="ccc()" id="search">
+            <p id="farid"></p>
         </div>
     </div>
 
@@ -36,26 +38,33 @@
 
 
 
-<div id="contener" class="container d-flex flex-wrap gap-5 mt-5">
-
-    <!-- <div class="card" style="width: 18rem;">
-        <img id="image1" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>   -->
-
-
-</div>
+<div id="container" class="container d-flex flex-wrap gap-5 mt-5"></div>
 
 </main>
-<button class="btn btn-danger" onclick="submit()"> hamer srrini</button>
 
-<div id="pop-up" class="pop-up">
 
-</div>
+
+
+
+<!-- <h4 id="nom"></h4>
+<div class="pup">
+    <div>
+        <img height="" width="" id="img" alt="">
+        <video src=""></video>
+    </div>
+    <div>
+        <p id="pag"></p>
+    </div>
+</div> -->
+
+<!-- pup  -->
+    <div id="pop_up" class="pop_up">
+
+    </div>
+
+
+<!-- <div id="pop_up" class="pop-up">
+</div> -->
 <script src="../js/main1.js"></script>
 </body>
 </html>
